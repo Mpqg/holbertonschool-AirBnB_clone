@@ -35,3 +35,7 @@ $ ./console.py [command] [arguments]
 - `help`: Show the help command
 - `count`: Show the number of users
 - `quit`: Exit the application
+
+<p align="center">
+<img src="./assets/Flujo.png" width="400px" align="center"/>
+</p>
