@@ -33,4 +33,4 @@ class TestAirbnbShellCommands(unittest.TestCase):
 		self.assertTrue(self.arbnb_methods.get("do_update"))
 
 	def test_should_exist_quit(self):
-		self.assertTrue(self.arbnb_methods.get("do_quita"))
+		self.assertTrue(self.arbnb_methods.get("do_quit"))
