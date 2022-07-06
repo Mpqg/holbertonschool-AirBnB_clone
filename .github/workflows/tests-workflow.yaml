@@ -18,3 +18,12 @@ jobs:
           use-black: false
           use-mypy: false
           use-isort: false
+
+  unit-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.8.5'
+      - run: python3 -m unittest discover tests
