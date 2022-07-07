@@ -123,6 +123,7 @@ class Airbnb_Shell(cmd.Cmd):
         Command to quit the program
         """
         return True
+
     def do_EOF(self, arg):
         """
         Command to quit the program
