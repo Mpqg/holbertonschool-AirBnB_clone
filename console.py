@@ -10,6 +10,7 @@ from models import user
 from models import state
 from models import city
 from models import amenity
+from models import storage
 
 """
 Setup console application
@@ -38,6 +39,7 @@ class Airbnb_Shell(cmd.Cmd):
         splitted_args = arg.split()
         current_class = None
         current_id = None
+        data = storage.all()
 
         if len(splitted_args) >= 1:
             current_class = splitted_args[0]
@@ -49,6 +51,10 @@ class Airbnb_Shell(cmd.Cmd):
             print("** class name missing **")
         elif current_id is None:
             print("** instance id missing **")
+        elif "{}.{}".format(current_class, current_id) not in data:
+            print("** no instance found **")
+        else:
+            print(data["{}.{}".format(current_class, current_id)])
 
     def do_destroy(self, arg):
         print("destroy")
