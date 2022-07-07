@@ -12,6 +12,7 @@ class BaseModel:
     """
     BaseModel class
     """
+
     def __init__(self, **kwargs):
         """
         Constructor
@@ -30,20 +31,21 @@ class BaseModel:
         if self.created_at is None:
             self.created_at = current_date
 
-
-
     def save(self):
         """
         Save method
         """
         self.updated_at = datetime.now()
+
     def to_dict(self):
         """
         to_dict method
         """
         pass
+
     def __str__(self):
         """
         String representation of the class
         """
-        print("[{}] ({}) {}".format(self.__class__.__name__, self.id, self.__dict__))
+        print("[{}] ({}) {}".format(
+            self.__class__.__name__, self.id, self.__dict__))
