@@ -89,6 +89,18 @@ class Airbnb_Shell(cmd.Cmd):
 
     def do_update(self, arg):
         print("update")
+    def do_count(sef, arg):
+        splitted_args = arg.split()
+        current_class = None
+
+        if len(splitted_args) >= 1:
+            current_class = splitted_args[0]
+
+        count = 0
+        for obj in storage.all().values():
+            if current_class == obj.__class__.__name__:
+                count += 1
+        print(count)
 
     def do_quit(self, arg):
         'Command to quit the program'
