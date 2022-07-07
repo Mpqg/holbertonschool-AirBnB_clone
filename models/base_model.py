@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-from models import storage
+import models
 """
 Base models controller
 """
@@ -28,7 +28,7 @@ class BaseModel:
         my_format = "%Y-%m-%dT%H:%M:%S.%f"
 
         if len(kwargs) == 0:
-            storage.new(self)
+            models.storage.new(self)
         else:
             for key, value in kwargs.items():
                 if key == "created_at" or key == "updated_at":
@@ -41,7 +41,7 @@ class BaseModel:
         Save method
         """
         self.updated_at = datetime.today()
-        storage.save()
+        models.storage.save()
 
     def to_dict(self):
         """

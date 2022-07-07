@@ -1,13 +1,26 @@
 #!/usr/bin/python3
 import cmd
 from models import storage
+from models.amenity import Amenity
+from models.city import City
+from models.place import Place
+from models.review import Review
+from models.state import State
+from models.user import User
 
 """
 Setup console application
 """
 
 
-classes = {"Amenity", "City", "Place", "Review", "State", "User"}
+classes = {
+    "Amenity": Amenity,
+    "City": City,
+    "Place": Place,
+    "Review": Review,
+    "State": State,
+    "User": User
+}
 
 
 class Airbnb_Shell(cmd.Cmd):
@@ -106,6 +119,11 @@ class Airbnb_Shell(cmd.Cmd):
         print(count)
 
     def do_quit(self, arg):
+        """
+        Command to quit the program
+        """
+        return True
+    def do_EOF(self, arg):
         """
         Command to quit the program
         """

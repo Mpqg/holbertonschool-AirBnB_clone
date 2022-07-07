@@ -1,5 +1,12 @@
 #!/usr/bin/python3
 import json
+from models.base_model import BaseModel
+from models.amenity import Amenity
+from models.city import City
+from models.place import Place
+from models.review import Review
+from models.state import State
+from models.user import User
 """
 File storage crud
 """
@@ -26,9 +33,11 @@ class FileStorage:
 
     def reload(self):
         try:
-            fd = open(self.__file_path, "r")
+            fd = open(self.__file_path)
             objects = json.load(fd)
             for obj in objects.values():
-                self.new(obj)
+                class_obj = obj["__class__"]
+                del obj["__class__"]
+                self.new(eval(class_obj)(**obj))
         except FileNotFoundError:
             return
