@@ -57,7 +57,32 @@ class Airbnb_Shell(cmd.Cmd):
             print(data["{}.{}".format(current_class, current_id)])
 
     def do_destroy(self, arg):
-        print("destroy")
+        """
+        Destroy an instance
+        """
+
+        splitted_args = arg.split()
+        current_class = None
+        current_id = None
+        data = storage.all()
+
+        if len(splitted_args) >= 1:
+            current_class = splitted_args[0]
+        if len(splitted_args) >= 2:
+            current_id = splitted_args[1]
+
+        data = storage.all()
+        if current_class is None:
+            print("** class name missing **")
+        elif current_class not in classes:
+            print("** class doesn't exist **")
+        elif current_id is None:
+            print("** instance id missing **")
+        elif "{}.{}".format(current_class, current_id) not in data.keys():
+            print("** no instance found **")
+        else:
+            del data["{}.{}".format(current_class, current_id)]
+            storage.save()
 
     def do_all(self, arg):
         print("all")
