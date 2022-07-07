@@ -1,15 +1,5 @@
 #!/usr/bin/python3
 import cmd
-import sys
-import shlex
-import models
-from models import base_model
-from models import place
-from models import review
-from models import user
-from models import state
-from models import city
-from models import amenity
 from models import storage
 
 """
