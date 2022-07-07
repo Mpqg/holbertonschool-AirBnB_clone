@@ -85,7 +85,22 @@ class Airbnb_Shell(cmd.Cmd):
             storage.save()
 
     def do_all(self, arg):
-        print("all")
+        splitted_args = arg.split()
+        current_class = None
+
+        if len(splitted_args) >= 1:
+            current_class = splitted_args[0]
+
+        if current_class not in classes:
+            print("** class doesn't exist **")
+        else:
+            objl = []
+            for obj in storage.all().values():
+                if current_class == obj.__class__.__name__:
+                    objl.append(obj.__str__())
+                else:
+                    objl.append(obj.__str__())
+            print(objl)
 
     def do_update(self, arg):
         print("update")
