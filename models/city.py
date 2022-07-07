@@ -9,3 +9,7 @@ class City(base_model.BaseModel):
     """
     state_id = ""
     name = ""
+
+    def __init__(self, *args, **kwargs):
+        """ Initialize method for city"""
+        super().__init__(*args, **kwargs)

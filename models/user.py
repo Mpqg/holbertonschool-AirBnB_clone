@@ -11,3 +11,7 @@ class User(base_model.BaseModel):
     password = ""
     first_name = ""
     last_name = ""
+
+    def __init__(self, *args, **kwargs):
+        """ Initialize method for user"""
+        super().__init__(*args, **kwargs)
