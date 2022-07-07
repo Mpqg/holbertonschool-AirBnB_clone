@@ -18,6 +18,7 @@ Setup console application
 
 classes = {"Amenity", "City", "Place", "Review", "State", "User"}
 
+
 class Airbnb_Shell(cmd.Cmd):
     """.editorconfig"""
     prompt = '(hbnb) '
