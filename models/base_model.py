@@ -25,8 +25,16 @@ class BaseModel:
         self.updated_at = datetime.today()
         self.created_at = datetime.today()
 
+        my_format = "%Y-%m-%dT%H:%M:%S.%f"
+
         if len(kwargs) == 0:
             storage.new(self)
+        else:
+            for key, value in kwargs.items():
+                if key == "created_at" or key == "updated_at":
+                    self.__dict__[key] = datetime.strptime(value, my_format)
+                else:
+                    self.__dict__[key] = value
 
     def save(self):
         """
