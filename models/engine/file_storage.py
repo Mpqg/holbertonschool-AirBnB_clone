@@ -8,7 +8,7 @@ File storage crud
 class FileStorage:
     """Class that store the files"""
     __file_path = "airbnb_database.json"
-    __objects = dict()
+    __objects = {}
 
     def all(self):
         return (self.__objects)
@@ -18,8 +18,17 @@ class FileStorage:
         self.__objects["{}.{}".format(name_model_class, obj.id)] = obj
 
     def save(self):
-        fd = open(self.__file_path, "w")
-        json.dump(self.__objects, fd)
+        print(self.__objects)
+        json_data = {key: obj.to_dict() for key, obj in self.__objects.items()}
+        print(json_data)
+        with open(FileStorage.__file_path, "w") as f:
+            json.dump(json_data, f)
 
     def reload(self):
-        
+        try:
+            fd = open(self.__file_path, "r")
+            objects = json.load(fd)
+            for obj in objects.values():
+                self.new(obj)
+        except FileNotFoundError:
+            return

@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-
+from models import storage
 """
 Base models controller
 """
@@ -13,39 +13,41 @@ class BaseModel:
     BaseModel class
     """
 
-    def __init__(self, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Constructor
         - id
         - created_at
         - updated_at
         """
-        self.id = str(uuid.uuid4())
-        self.updated_at = kwargs.get("updated_at", None)
-        self.created_at = kwargs.get("created_at", None)
-
         current_date = datetime.isoformat(datetime.now())
+        self.id = str(uuid.uuid4())
+        self.updated_at = datetime.today()
+        self.created_at = datetime.today()
 
-        if self.updated_at is None:
-            self.updated_at = current_date
-        if self.created_at is None:
-            self.created_at = current_date
+        if len(kwargs) == 0:
+            storage.new(self)
 
     def save(self):
         """
         Save method
         """
-        self.updated_at = datetime.now()
+        self.updated_at = datetime.today()
+        storage.save()
 
     def to_dict(self):
         """
-        to_dict method
+        Dictionary with attributes and formats
         """
-        pass
+        my_dict = dict(self.__dict__)
+        my_dict["created_at"] = self.created_at.isoformat()
+        my_dict["updated_at"] = self.updated_at.isoformat()
+        my_dict["__class__"] = self.__class__.__name__
+        return my_dict
 
     def __str__(self):
         """
         String representation of the class
         """
-        print("[{}] ({}) {}".format(
-            self.__class__.__name__, self.id, self.__dict__))
+        return "[{}] ({}) {}".format(
+            self.__class__.__name__, self.id, self.__dict__)
